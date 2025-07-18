@@ -1,0 +1,49 @@
+# Client (Node.js)
+client/node_modules/
+client/dist/
+client/.env
+client/.env.*
+
+# Server (.NET)
+server/**/bin/
+server/**/obj/
+server/**/.vs
+server/**/Debug/
+server/**/Release/
+server/**/TestResults/
+server/**/project.assets.json
+server/**/project.nuget.cache
+server/**/staticwebassets/
+server/**/staticwebassets.removed.txt
+server/**/Properties/launchSettings.json
+**/appsettings.Development.json
+**/appsettings.Production.json
+
+# General
+
+# Vite
+client/.vite/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# VSCode/JetBrains/other IDEs
+.vscode/
+.idea/
+*.sw?
+*.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Build output
+dist/
+build/
