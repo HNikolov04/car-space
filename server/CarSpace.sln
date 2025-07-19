@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarSpace.WebApi", "WebApi\C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarSpace.WebApi.Infrastructure", "WebApi\CarSpace.WebApi.Infrastructure\CarSpace.WebApi.Infrastructure.csproj", "{C4A515DE-9EA6-4C79-BC13-80FDF12E332B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarSpace.GCommon", "CarSpace.GCommon\CarSpace.GCommon.csproj", "{EB1F6892-AA07-4211-AF79-66B7882159EE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{C4A515DE-9EA6-4C79-BC13-80FDF12E332B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4A515DE-9EA6-4C79-BC13-80FDF12E332B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4A515DE-9EA6-4C79-BC13-80FDF12E332B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB1F6892-AA07-4211-AF79-66B7882159EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB1F6892-AA07-4211-AF79-66B7882159EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB1F6892-AA07-4211-AF79-66B7882159EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB1F6892-AA07-4211-AF79-66B7882159EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
