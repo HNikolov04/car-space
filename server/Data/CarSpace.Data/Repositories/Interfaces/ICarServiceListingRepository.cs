@@ -1,4 +1,4 @@
-﻿using CarSpace.Data.Models.Entities.CarServiceListing;
+﻿using CarSpace.Data.Models.Entities.CarServices;
 
 namespace CarSpace.Data.Repositories.Interfaces;
 

@@ -8,5 +8,6 @@ public sealed record CreateCarServiceListingRequest(
     string City,
     string Address,
     decimal? Price,
+    string ImageUrl,
     Guid UserId
 );

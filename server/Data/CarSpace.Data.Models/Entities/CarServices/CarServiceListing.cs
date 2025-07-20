@@ -1,6 +1,6 @@
 ﻿using CarSpace.Data.Models.Entities.User;
 
-namespace CarSpace.Data.Models.Entities.CarServiceListing;
+namespace CarSpace.Data.Models.Entities.CarServices;
 
 public class CarServiceListing
 {
@@ -11,7 +11,8 @@ public class CarServiceListing
     public string PhoneNumber { get; set; } = null!;
     public string City { get; set; } = null!;
     public string Address { get; set; } = null!;
-    public decimal? Price { get; set; }  
+    public decimal? Price { get; set; }
+    public string ImageUrl { get; set; } = null!;
     public DateTime CreatedAt { get; set; }
     public Guid UserId { get; set; }
     public ApplicationUser User { get; set; } = null!;

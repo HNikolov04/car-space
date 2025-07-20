@@ -9,6 +9,7 @@ public sealed record GetCarServiceListingByIdResponse(
     string City,
     string Address,
     decimal? Price,
+    string ImageUrl,
     DateTime CreatedAt,
     Guid UserId
 );

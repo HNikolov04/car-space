@@ -1,6 +1,6 @@
 ﻿using CarSpace.Data.Models.CarForum;
 using CarSpace.Data.Models.Entities.CarForum;
-using CarSpace.Data.Models.Entities.CarServiceListing;
+using CarSpace.Data.Models.Entities.CarServices;
 using CarSpace.Data.Models.Entities.User;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;

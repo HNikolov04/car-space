@@ -4,6 +4,7 @@ using CarSpace.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarSpace.Data.Migrations
 {
     [DbContext(typeof(CarSpaceDbContext))]
-    partial class CarSpaceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250720164138_AddedCarServiceListingFeature")]
+    partial class AddedCarServiceListingFeature
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,7 +56,7 @@ namespace CarSpace.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("CarForumArticles", (string)null);
+                    b.ToTable("CarForumArticles");
                 });
 
             modelBuilder.Entity("CarSpace.Data.Models.Entities.CarForum.CarForumComment", b =>
@@ -82,7 +85,7 @@ namespace CarSpace.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("CarForumArticleComments", (string)null);
+                    b.ToTable("CarForumArticleComments");
                 });
 
             modelBuilder.Entity("CarSpace.Data.Models.Entities.CarServiceListing.CarServiceListing", b =>
@@ -140,7 +143,7 @@ namespace CarSpace.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("CarServiceListings", (string)null);
+                    b.ToTable("CarServiceListings");
                 });
 
             modelBuilder.Entity("CarSpace.Data.Models.Entities.User.ApplicationUser", b =>

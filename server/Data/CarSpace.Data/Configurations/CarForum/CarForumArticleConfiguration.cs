@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace CarSpace.Data.Configurations;
+namespace CarSpace.Data.Configurations.CarForum;
 
 public class CarForumArticleConfiguration : IEntityTypeConfiguration<CarForumArticle>
 {

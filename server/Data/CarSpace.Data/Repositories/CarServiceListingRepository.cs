@@ -1,4 +1,4 @@
-﻿using CarSpace.Data.Models.Entities.CarServiceListing;
+﻿using CarSpace.Data.Models.Entities.CarServices;
 using CarSpace.Data.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 

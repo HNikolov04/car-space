@@ -5,5 +5,6 @@ public sealed record GetAllCarServiceListingsResponse(
     string Title,
     string City,
     string Category,
-    decimal? Price
+    decimal? Price,
+    string ImageUrl
 );

@@ -1,4 +1,4 @@
-﻿using CarSpace.Data.Models.Entities.CarServiceListing;
+﻿using CarSpace.Data.Models.Entities.CarServices;
 using CarSpace.Data.Repositories.Interfaces;
 using CarSpace.Services.Core.Contracts.CarServiceListing.Requests;
 using CarSpace.Services.Core.Contracts.CarServiceListing.Responses;
@@ -20,7 +20,13 @@ public class CarServiceListingService : ICarServiceListingService
         var listings = await _carServiceListingRepository.GetAllCarServiceListingsAsync();
 
         return listings.Select(l => new GetAllCarServiceListingsResponse(
-            l.Id, l.Title, l.City, l.Category, l.Price));
+            l.Id,
+            l.Title,
+            l.City,
+            l.Category,
+            l.Price,
+            l.ImageUrl
+        ));
     }
 
     public async Task<GetCarServiceListingByIdResponse?> GetCarServiceListingByIdAsync(Guid id)
@@ -28,8 +34,17 @@ public class CarServiceListingService : ICarServiceListingService
         var l = await _carServiceListingRepository.GetCarServiceListingByIdAsync(id);
 
         return l is null ? null : new GetCarServiceListingByIdResponse(
-            l.Id, l.Title, l.Description, l.Category, l.PhoneNumber,
-            l.City, l.Address, l.Price, l.CreatedAt, l.UserId
+            l.Id,
+            l.Title,
+            l.Description,
+            l.Category,
+            l.PhoneNumber,
+            l.City,
+            l.Address,
+            l.Price,
+            l.ImageUrl,
+            l.CreatedAt,
+            l.UserId
         );
     }
 
@@ -45,6 +60,7 @@ public class CarServiceListingService : ICarServiceListingService
             City = request.City,
             Address = request.Address,
             Price = request.Price,
+            ImageUrl = request.ImageUrl,
             CreatedAt = DateTime.UtcNow,
             UserId = request.UserId
         };
@@ -52,8 +68,17 @@ public class CarServiceListingService : ICarServiceListingService
         await _carServiceListingRepository.AddCarServiceListingAsync(entity);
 
         return new GetCarServiceListingByIdResponse(
-            entity.Id, entity.Title, entity.Description, entity.Category, entity.PhoneNumber,
-            entity.City, entity.Address, entity.Price, entity.CreatedAt, entity.UserId
+            entity.Id,
+            entity.Title,
+            entity.Description,
+            entity.Category,
+            entity.PhoneNumber,
+            entity.City,
+            entity.Address,
+            entity.Price,
+            entity.ImageUrl,
+            entity.CreatedAt,
+            entity.UserId
         );
     }
 
@@ -62,9 +87,7 @@ public class CarServiceListingService : ICarServiceListingService
         var listing = await _carServiceListingRepository.GetCarServiceListingByIdAsync(request.Id);
 
         if (listing is null)
-        {
             return false;
-        }
 
         listing.Title = request.Title;
         listing.Description = request.Description;
@@ -73,6 +96,7 @@ public class CarServiceListingService : ICarServiceListingService
         listing.City = request.City;
         listing.Address = request.Address;
         listing.Price = request.Price;
+        listing.ImageUrl = request.ImageUrl;
 
         await _carServiceListingRepository.UpdateCarServiceListingAsync(listing);
 
