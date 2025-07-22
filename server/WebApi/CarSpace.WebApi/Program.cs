@@ -41,6 +41,9 @@ public class Program
         builder.Services.AddScoped<ICarMeetRepository, CarMeetRepository>();
         builder.Services.AddScoped<ICarMeetService, CarMeetService>();
 
+        builder.Services.AddScoped<ICarsAndSuvsListingRepository, CarsAndSuvsListingRepository>();
+        builder.Services.AddScoped<ICarsAndSuvsListingService, CarsAndSuvsListingService>();
+
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();

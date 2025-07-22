@@ -1,6 +1,5 @@
 ﻿using CarSpace.Services.Core.Contracts.CarMeet.Requests;
 using CarSpace.Services.Core.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarSpace.WebApi.Controllers;

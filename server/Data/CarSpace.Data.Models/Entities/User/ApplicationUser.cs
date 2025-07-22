@@ -1,6 +1,7 @@
 ﻿using CarSpace.Data.Models.CarForum;
 using CarSpace.Data.Models.Entities.CarForum;
 using CarSpace.Data.Models.Entities.CarServices;
+using CarSpace.Data.Models.Entities.CarShop;
 using CarSpace.Data.Models.Entities.Meet;
 using Microsoft.AspNetCore.Identity;
 
@@ -25,4 +26,5 @@ public sealed class ApplicationUser : IdentityUser<Guid>
     public ICollection<CarMeet> CreatedMeets { get; set; } = new HashSet<CarMeet>();
     public ICollection<CarMeet> JoinedMeets { get; set; } = new HashSet<CarMeet>();
 
+    public ICollection<CarsAndSuvsListing> CarsAndSuvsListings { get; set; } = new HashSet<CarsAndSuvsListing>();
 }

@@ -1,6 +1,7 @@
 ﻿using CarSpace.Data.Models.CarForum;
 using CarSpace.Data.Models.Entities.CarForum;
 using CarSpace.Data.Models.Entities.CarServices;
+using CarSpace.Data.Models.Entities.CarShop;
 using CarSpace.Data.Models.Entities.Meet;
 using CarSpace.Data.Models.Entities.User;
 using Microsoft.AspNetCore.Identity;
@@ -24,6 +25,8 @@ public class CarSpaceDbContext : IdentityDbContext<ApplicationUser, IdentityRole
     public DbSet<CarServiceListing> CarServiceListings { get; set; }
 
     public DbSet<CarMeet> CarMeets { get; set; }
+
+    public DbSet<CarsAndSuvsListing> CarsAndSuvsListings { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
