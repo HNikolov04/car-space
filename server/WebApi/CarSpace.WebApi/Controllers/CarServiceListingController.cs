@@ -1,72 +1,110 @@
-﻿using CarSpace.Services.Core.Contracts.CarServiceListing.Requests;
-using CarSpace.Services.Core.Interfaces;
-using Microsoft.AspNetCore.Http;
+﻿using CarSpace.Services.Core.Contracts.CarService.CarServiceListing.Requests;
+using CarSpace.Services.Core.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CarSpace.WebApi.Controllers
+namespace CarSpace.WebApi.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class CarServiceListingController : BaseWebApiController
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class CarServiceListingController : ControllerBase
+    private readonly ICarServiceListingService _carServiceListingService;
+
+    public CarServiceListingController(ICarServiceListingService carServiceListingService)
     {
-        private readonly ICarServiceListingService _carServiceListingService;
+        _carServiceListingService = carServiceListingService;
+    }
 
-        public CarServiceListingController(ICarServiceListingService carServiceListingService)
+    [HttpGet]
+    [AllowAnonymous]
+    public async Task<IActionResult> GetServiceListings([FromQuery] GetCarServiceListingsRequest request)
+    {
+        Guid? userId = IsAuthenticated() ? GetUserId() : null;
+
+        var result = await _carServiceListingService.GetCarServiceListingsAsync(request, userId);
+
+        return Ok(result);
+    }
+
+    [HttpGet("{id}")]
+    [AllowAnonymous]
+    public async Task<IActionResult> GetById(Guid id)
+    {
+        Guid? userId = IsAuthenticated() ? GetUserId() : null;
+
+        var listing = await _carServiceListingService.GetCarServiceListingByIdAsync(id, userId);
+
+        if (listing is null)
         {
-            _carServiceListingService = carServiceListingService;
+            return NotFound();
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAll()
+        return Ok(listing);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Create([FromForm] CreateCarServiceListingRequest request)
+    {
+        var userId = GetUserId();
+
+        var response = await _carServiceListingService.CreateCarServiceListingAsync(request, userId);
+
+        return CreatedAtAction(nameof(GetById), new { id = response.Id }, response);
+    }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Update(Guid id, [FromForm] UpdateCarServiceListingRequest request)
+    {
+        var userId = GetUserId();
+
+        var updated = await _carServiceListingService.UpdateCarServiceListingAsync(request, userId);
+
+        if (!updated)
         {
-            return Ok(await _carServiceListingService.GetAllCarServiceListingsAsync());
+            return NotFound();
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(Guid id)
+        return NoContent();
+    }
+
+    [HttpPost("{id}/save")]
+    public async Task<IActionResult> Save(Guid id)
+    {
+        var userId = GetUserId();
+
+        var success = await _carServiceListingService.SaveCarServiceListingAsync(id, userId);
+
+        if (!success)
         {
-            var listing = await _carServiceListingService.GetCarServiceListingByIdAsync(id);
-
-            if (listing is null)
-            {
-                return NotFound();
-            }
-
-            return Ok(listing);
+            return BadRequest("Listing already saved or invalid.");
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CreateCarServiceListingRequest request)
-        {
-            var response = await _carServiceListingService.CreateCarServiceListingAsync(request);
+        return Ok("Saved successfully.");
+    }
 
-            return CreatedAtAction(nameof(GetById), new { id = response.Id }, response);
+    [HttpDelete("{id}/unsave")]
+    public async Task<IActionResult> Unsave(Guid id)
+    {
+        var userId = GetUserId();
+
+        var success = await _carServiceListingService.UnsaveCarServiceListingAsync(id, userId);
+
+        if (!success)
+        {
+            return NotFound("Save not found or already removed.");
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Update(Guid id, [FromBody] UpdateCarServiceListingRequest request)
-        {
-            if (id != request.Id)
-            {
-                return BadRequest("ID mismatch");
-            }
+        return Ok("Unsave successful.");
+    }
 
-            var updated = await _carServiceListingService.UpdateCarServiceListingAsync(request);
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(Guid id)
+    {
+        var userId = GetUserId();
 
-            if (!updated)
-            {
-                return NotFound();
-            }
+        await _carServiceListingService.DeleteCarServiceListingAsync(id, userId);
 
-            return NoContent();
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(Guid id)
-        {
-            await _carServiceListingService.DeleteCarServiceListingAsync(id);
-
-            return NoContent();
-        }
+        return NoContent();
     }
 }
