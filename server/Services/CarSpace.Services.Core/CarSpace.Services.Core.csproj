@@ -13,10 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\CarSpace.Data.Models\CarSpace.Data.Models.csproj" />
     <ProjectReference Include="..\..\Data\CarSpace.Data\CarSpace.Data.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Contracts\User\Responses\" />
+    <ProjectReference Include="..\CarSpace.Services.Common\CarSpace.Services.Common.csproj" />
   </ItemGroup>
 
 </Project>

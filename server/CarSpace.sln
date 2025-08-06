@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarSpace.WebApi.Infrastruct
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarSpace.GCommon", "CarSpace.GCommon\CarSpace.GCommon.csproj", "{EB1F6892-AA07-4211-AF79-66B7882159EE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarSpace.Services.Tests", "Tests\CarSpace.Services.Tests\CarSpace.Services.Tests.csproj", "{767AC477-23C6-4B4E-A458-8055532B3B16}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -65,6 +67,10 @@ Global
 		{EB1F6892-AA07-4211-AF79-66B7882159EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB1F6892-AA07-4211-AF79-66B7882159EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB1F6892-AA07-4211-AF79-66B7882159EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{767AC477-23C6-4B4E-A458-8055532B3B16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{767AC477-23C6-4B4E-A458-8055532B3B16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{767AC477-23C6-4B4E-A458-8055532B3B16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{767AC477-23C6-4B4E-A458-8055532B3B16}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -77,6 +83,7 @@ Global
 		{A369E581-D0F7-460A-874A-5A9D123FFEDE} = {85BE67C1-12F2-4DE9-BDD5-028F3F084B15}
 		{921D8DF6-7AA6-43A5-A7E9-59BE4CD59F85} = {CE0E26B0-FA2B-40D1-9630-78DA0E41484F}
 		{C4A515DE-9EA6-4C79-BC13-80FDF12E332B} = {CE0E26B0-FA2B-40D1-9630-78DA0E41484F}
+		{767AC477-23C6-4B4E-A458-8055532B3B16} = {91BB7A3A-3494-4ECC-8714-D949ED64186C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {44DC283F-91AF-44E2-A027-45E57496AE48}
