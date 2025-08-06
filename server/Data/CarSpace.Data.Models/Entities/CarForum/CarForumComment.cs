@@ -6,10 +6,12 @@ namespace CarSpace.Data.Models.Entities.CarForum;
 public class CarForumComment
 {
     public Guid Id { get; set; }
-    public string Content { get; set; }
+    public string Content { get; set; } = null!;
     public DateTime CreatedAt { get; set; }
+
     public Guid UserId { get; set; }
-    public ApplicationUser User { get; set; }
+    public virtual ApplicationUser User { get; set; } = null!;
+
     public Guid CarForumArticleId { get; set; }
-    public CarForumArticle CarForumArticle { get; set; }
+    public virtual CarForumArticle CarForumArticle { get; set; } = null!;
 }
