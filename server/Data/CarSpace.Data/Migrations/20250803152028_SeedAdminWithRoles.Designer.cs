@@ -4,6 +4,7 @@ using CarSpace.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarSpace.Data.Migrations
 {
     [DbContext(typeof(CarSpaceDbContext))]
-    partial class CarSpaceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250803152028_SeedAdminWithRoles")]
+    partial class SeedAdminWithRoles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,29 +62,6 @@ namespace CarSpace.Data.Migrations
                     b.ToTable("CarForumArticles");
                 });
 
-            modelBuilder.Entity("CarSpace.Data.Models.Entities.About.AboutUs", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Message")
-                        .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AboutUs");
-                });
-
             modelBuilder.Entity("CarSpace.Data.Models.Entities.CarForum.CarForumBrand", b =>
                 {
                     b.Property<int>("Id")
@@ -98,6 +78,23 @@ namespace CarSpace.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CarForumBrands");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "BMW"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Audi"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Mercedes"
+                        });
                 });
 
             modelBuilder.Entity("CarSpace.Data.Models.Entities.CarForum.CarForumComment", b =>
@@ -144,87 +141,7 @@ namespace CarSpace.Data.Migrations
                     b.ToTable("UserSavedCarForumArticles");
                 });
 
-            modelBuilder.Entity("CarSpace.Data.Models.Entities.CarMeet.CarMeetListing", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
-
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
-
-                    b.Property<DateTime>("MeetDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("CarMeetListings");
-                });
-
-            modelBuilder.Entity("CarSpace.Data.Models.Entities.CarMeet.UserJoinedCarMeetListing", b =>
-                {
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("CarMeetId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("UserId", "CarMeetId");
-
-                    b.HasIndex("CarMeetId");
-
-                    b.ToTable("UserJoinedCarMeetListings");
-                });
-
-            modelBuilder.Entity("CarSpace.Data.Models.Entities.CarMeet.UserSavedCarMeetListing", b =>
-                {
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("CarMeetId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("UserId", "CarMeetId");
-
-                    b.HasIndex("CarMeetId");
-
-                    b.ToTable("UserSavedCarMeetListings");
-                });
-
-            modelBuilder.Entity("CarSpace.Data.Models.Entities.CarService.CarServiceCategory", b =>
+            modelBuilder.Entity("CarSpace.Data.Models.Entities.CarServices.CarServiceCategory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -240,9 +157,36 @@ namespace CarSpace.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CarServiceCategories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Repair"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Washing"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Detailing"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Tire Services"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Oil Change"
+                        });
                 });
 
-            modelBuilder.Entity("CarSpace.Data.Models.Entities.CarService.CarServiceListing", b =>
+            modelBuilder.Entity("CarSpace.Data.Models.Entities.CarServices.CarServiceListing", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -303,7 +247,7 @@ namespace CarSpace.Data.Migrations
                     b.ToTable("CarServiceListings");
                 });
 
-            modelBuilder.Entity("CarSpace.Data.Models.Entities.CarService.UserSavedCarServiceListing", b =>
+            modelBuilder.Entity("CarSpace.Data.Models.Entities.CarServices.UserSavedCarService", b =>
                 {
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
@@ -315,10 +259,10 @@ namespace CarSpace.Data.Migrations
 
                     b.HasIndex("CarServiceListingId");
 
-                    b.ToTable("UserSavedCarServicesListings");
+                    b.ToTable("UserSavedCarServices");
                 });
 
-            modelBuilder.Entity("CarSpace.Data.Models.Entities.CarShop.CarShopBrand", b =>
+            modelBuilder.Entity("CarSpace.Data.Models.Entities.CarShop.CarCarsAndSuvsListingBrand", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -333,10 +277,27 @@ namespace CarSpace.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CarShopBrands");
+                    b.ToTable("CarCarsAndSuvsListingBrands");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "BMW"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Audi"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Mercedes"
+                        });
                 });
 
-            modelBuilder.Entity("CarSpace.Data.Models.Entities.CarShop.CarShopListing", b =>
+            modelBuilder.Entity("CarSpace.Data.Models.Entities.CarShop.CarsAndSuvsListing", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -426,53 +387,102 @@ namespace CarSpace.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("CarShopListings");
+                    b.ToTable("CarsAndSuvsListings");
                 });
 
-            modelBuilder.Entity("CarSpace.Data.Models.Entities.CarShop.UserSavedCarShopListing", b =>
+            modelBuilder.Entity("CarSpace.Data.Models.Entities.CarShop.UserSavedCarsAndSuvsListing", b =>
                 {
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CarShopListingId")
+                    b.Property<Guid>("CarsAndSuvsListingId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("UserId", "CarShopListingId");
+                    b.HasKey("UserId", "CarsAndSuvsListingId");
 
-                    b.HasIndex("CarShopListingId");
+                    b.HasIndex("CarsAndSuvsListingId");
 
-                    b.ToTable("UserSavedCarShopListings");
+                    b.ToTable("UserSavedCarsAndSuvsListings");
                 });
 
-            modelBuilder.Entity("CarSpace.Data.Models.Entities.Contact.ContactUs", b =>
+            modelBuilder.Entity("CarSpace.Data.Models.Entities.Meet.CarMeet", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Email")
+                    b.Property<string>("Address")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
-                    b.Property<string>("Message")
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
-                    b.Property<string>("Phone")
+                    b.Property<string>("ImageUrl")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<DateTime>("MeetDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
-                    b.ToTable("ContactUs");
+                    b.HasIndex("UserId");
+
+                    b.ToTable("CarMeets");
+                });
+
+            modelBuilder.Entity("CarSpace.Data.Models.Entities.Meet.UserCarMeetParticipant", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CarMeetId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("UserId", "CarMeetId");
+
+                    b.HasIndex("CarMeetId");
+
+                    b.ToTable("UserCarMeetParticipants");
+                });
+
+            modelBuilder.Entity("CarSpace.Data.Models.Entities.Meet.UserSavedCarMeet", b =>
+                {
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CarMeetId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("UserId", "CarMeetId");
+
+                    b.HasIndex("CarMeetId");
+
+                    b.ToTable("UserSavedCarMeets");
                 });
 
             modelBuilder.Entity("CarSpace.Data.Models.Entities.User.ApplicationUser", b =>
@@ -546,6 +556,23 @@ namespace CarSpace.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("11111111-1111-1111-1111-111111111111"),
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "f292f53c-b02a-46b9-84c7-8e9064381b7a",
+                            Email = "admin@carspace.com",
+                            EmailConfirmed = false,
+                            ImageUrl = "/user-content/profile-pictures/CarSpaceUserDefaultWhiteModePfpDefault.png",
+                            IsDeleted = false,
+                            LockoutEnabled = false,
+                            PasswordHash = "AQAAAAIAAYagAAAAEIcnDXjy/hky/Uy8blryjYYq45Yu/AcYrXYbp5E6UW9Sv3caP4Gx9M+nfrWbhlPQ2g==",
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false,
+                            UserName = "admin"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
@@ -574,6 +601,20 @@ namespace CarSpace.Data.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("7487f894-3a49-4bce-ea22-08dd2099696a"),
+                            Name = "Administrator",
+                            NormalizedName = "ADMINISTRATOR"
+                        },
+                        new
+                        {
+                            Id = new Guid("6d034953-dc38-4d45-ea21-08dd2099696a"),
+                            Name = "User",
+                            NormalizedName = "USER"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -658,6 +699,13 @@ namespace CarSpace.Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = new Guid("11111111-1111-1111-1111-111111111111"),
+                            RoleId = new Guid("7487f894-3a49-4bce-ea22-08dd2099696a")
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
@@ -701,7 +749,7 @@ namespace CarSpace.Data.Migrations
             modelBuilder.Entity("CarSpace.Data.Models.Entities.CarForum.CarForumComment", b =>
                 {
                     b.HasOne("CarSpace.Data.Models.CarForum.CarForumArticle", "CarForumArticle")
-                        .WithMany("CarForumComments")
+                        .WithMany("Comments")
                         .HasForeignKey("CarForumArticleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -722,13 +770,13 @@ namespace CarSpace.Data.Migrations
                     b.HasOne("CarSpace.Data.Models.CarForum.CarForumArticle", "CarForumArticle")
                         .WithMany("SavedByUsers")
                         .HasForeignKey("CarForumArticleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("CarSpace.Data.Models.Entities.User.ApplicationUser", "User")
                         .WithMany("SavedCarForumArticles")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("CarForumArticle");
@@ -736,58 +784,9 @@ namespace CarSpace.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("CarSpace.Data.Models.Entities.CarMeet.CarMeetListing", b =>
+            modelBuilder.Entity("CarSpace.Data.Models.Entities.CarServices.CarServiceListing", b =>
                 {
-                    b.HasOne("CarSpace.Data.Models.Entities.User.ApplicationUser", "User")
-                        .WithMany("CreatedCarMeetListings")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("CarSpace.Data.Models.Entities.CarMeet.UserJoinedCarMeetListing", b =>
-                {
-                    b.HasOne("CarSpace.Data.Models.Entities.CarMeet.CarMeetListing", "CarMeetListing")
-                        .WithMany("Participants")
-                        .HasForeignKey("CarMeetId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CarSpace.Data.Models.Entities.User.ApplicationUser", "User")
-                        .WithMany("JoinedCarMeetListings")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("CarMeetListing");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("CarSpace.Data.Models.Entities.CarMeet.UserSavedCarMeetListing", b =>
-                {
-                    b.HasOne("CarSpace.Data.Models.Entities.CarMeet.CarMeetListing", "CarMeetListing")
-                        .WithMany("SavedByUsers")
-                        .HasForeignKey("CarMeetId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("CarSpace.Data.Models.Entities.User.ApplicationUser", "User")
-                        .WithMany("SavedCarMeetListings")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("CarMeetListing");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("CarSpace.Data.Models.Entities.CarService.CarServiceListing", b =>
-                {
-                    b.HasOne("CarSpace.Data.Models.Entities.CarService.CarServiceCategory", "Category")
+                    b.HasOne("CarSpace.Data.Models.Entities.CarServices.CarServiceCategory", "Category")
                         .WithMany("CarServiceListings")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -804,18 +803,18 @@ namespace CarSpace.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("CarSpace.Data.Models.Entities.CarService.UserSavedCarServiceListing", b =>
+            modelBuilder.Entity("CarSpace.Data.Models.Entities.CarServices.UserSavedCarService", b =>
                 {
-                    b.HasOne("CarSpace.Data.Models.Entities.CarService.CarServiceListing", "CarServiceListing")
+                    b.HasOne("CarSpace.Data.Models.Entities.CarServices.CarServiceListing", "CarServiceListing")
                         .WithMany("SavedByUsers")
                         .HasForeignKey("CarServiceListingId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("CarSpace.Data.Models.Entities.User.ApplicationUser", "User")
                         .WithMany("SavedServiceListings")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("CarServiceListing");
@@ -823,18 +822,18 @@ namespace CarSpace.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("CarSpace.Data.Models.Entities.CarShop.CarShopListing", b =>
+            modelBuilder.Entity("CarSpace.Data.Models.Entities.CarShop.CarsAndSuvsListing", b =>
                 {
-                    b.HasOne("CarSpace.Data.Models.Entities.CarShop.CarShopBrand", "Brand")
-                        .WithMany("CarShopListings")
+                    b.HasOne("CarSpace.Data.Models.Entities.CarShop.CarCarsAndSuvsListingBrand", "Brand")
+                        .WithMany("Listings")
                         .HasForeignKey("CarBrandId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("CarSpace.Data.Models.Entities.User.ApplicationUser", "User")
-                        .WithMany("CreatedCarShopListings")
+                        .WithMany("CreatedCarsAndSuvsListings")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Brand");
@@ -842,21 +841,70 @@ namespace CarSpace.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("CarSpace.Data.Models.Entities.CarShop.UserSavedCarShopListing", b =>
+            modelBuilder.Entity("CarSpace.Data.Models.Entities.CarShop.UserSavedCarsAndSuvsListing", b =>
                 {
-                    b.HasOne("CarSpace.Data.Models.Entities.CarShop.CarShopListing", "CarShopListing")
+                    b.HasOne("CarSpace.Data.Models.Entities.CarShop.CarsAndSuvsListing", "Listing")
                         .WithMany("SavedByUsers")
-                        .HasForeignKey("CarShopListingId")
+                        .HasForeignKey("CarsAndSuvsListingId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("CarSpace.Data.Models.Entities.User.ApplicationUser", "User")
+                        .WithMany("SavedCarsAndSuvsListings")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Listing");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("CarSpace.Data.Models.Entities.Meet.CarMeet", b =>
+                {
+                    b.HasOne("CarSpace.Data.Models.Entities.User.ApplicationUser", "User")
+                        .WithMany("CreatedCarMeets")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("CarSpace.Data.Models.Entities.Meet.UserCarMeetParticipant", b =>
+                {
+                    b.HasOne("CarSpace.Data.Models.Entities.Meet.CarMeet", "CarMeet")
+                        .WithMany("Participants")
+                        .HasForeignKey("CarMeetId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("CarSpace.Data.Models.Entities.User.ApplicationUser", "User")
-                        .WithMany("SavedCarShopListings")
+                        .WithMany("JoinedCarMeets")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("CarShopListing");
+                    b.Navigation("CarMeet");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("CarSpace.Data.Models.Entities.Meet.UserSavedCarMeet", b =>
+                {
+                    b.HasOne("CarSpace.Data.Models.Entities.Meet.CarMeet", "CarMeet")
+                        .WithMany("SavedByUsers")
+                        .HasForeignKey("CarMeetId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("CarSpace.Data.Models.Entities.User.ApplicationUser", "User")
+                        .WithMany("SavedCarMeets")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("CarMeet");
 
                     b.Navigation("User");
                 });
@@ -914,7 +962,7 @@ namespace CarSpace.Data.Migrations
 
             modelBuilder.Entity("CarSpace.Data.Models.CarForum.CarForumArticle", b =>
                 {
-                    b.Navigation("CarForumComments");
+                    b.Navigation("Comments");
 
                     b.Navigation("SavedByUsers");
                 });
@@ -924,30 +972,30 @@ namespace CarSpace.Data.Migrations
                     b.Navigation("CarForumArticles");
                 });
 
-            modelBuilder.Entity("CarSpace.Data.Models.Entities.CarMeet.CarMeetListing", b =>
-                {
-                    b.Navigation("Participants");
-
-                    b.Navigation("SavedByUsers");
-                });
-
-            modelBuilder.Entity("CarSpace.Data.Models.Entities.CarService.CarServiceCategory", b =>
+            modelBuilder.Entity("CarSpace.Data.Models.Entities.CarServices.CarServiceCategory", b =>
                 {
                     b.Navigation("CarServiceListings");
                 });
 
-            modelBuilder.Entity("CarSpace.Data.Models.Entities.CarService.CarServiceListing", b =>
+            modelBuilder.Entity("CarSpace.Data.Models.Entities.CarServices.CarServiceListing", b =>
                 {
                     b.Navigation("SavedByUsers");
                 });
 
-            modelBuilder.Entity("CarSpace.Data.Models.Entities.CarShop.CarShopBrand", b =>
+            modelBuilder.Entity("CarSpace.Data.Models.Entities.CarShop.CarCarsAndSuvsListingBrand", b =>
                 {
-                    b.Navigation("CarShopListings");
+                    b.Navigation("Listings");
                 });
 
-            modelBuilder.Entity("CarSpace.Data.Models.Entities.CarShop.CarShopListing", b =>
+            modelBuilder.Entity("CarSpace.Data.Models.Entities.CarShop.CarsAndSuvsListing", b =>
                 {
+                    b.Navigation("SavedByUsers");
+                });
+
+            modelBuilder.Entity("CarSpace.Data.Models.Entities.Meet.CarMeet", b =>
+                {
+                    b.Navigation("Participants");
+
                     b.Navigation("SavedByUsers");
                 });
 
@@ -957,19 +1005,19 @@ namespace CarSpace.Data.Migrations
 
                     b.Navigation("CreatedCarForumComments");
 
-                    b.Navigation("CreatedCarMeetListings");
+                    b.Navigation("CreatedCarMeets");
 
                     b.Navigation("CreatedCarServiceListings");
 
-                    b.Navigation("CreatedCarShopListings");
+                    b.Navigation("CreatedCarsAndSuvsListings");
 
-                    b.Navigation("JoinedCarMeetListings");
+                    b.Navigation("JoinedCarMeets");
 
                     b.Navigation("SavedCarForumArticles");
 
-                    b.Navigation("SavedCarMeetListings");
+                    b.Navigation("SavedCarMeets");
 
-                    b.Navigation("SavedCarShopListings");
+                    b.Navigation("SavedCarsAndSuvsListings");
 
                     b.Navigation("SavedServiceListings");
                 });
